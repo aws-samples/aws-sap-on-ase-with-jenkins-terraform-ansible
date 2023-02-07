@@ -1,0 +1,25 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Create Download destination folder
+  file:
+    path: "{{ ascs_installer_dest_folder }}"
+    state: directory
+
+- name: Download installation files from S3 bucket. This is a big download - So hang on since it may take few minutes
+  shell: aws s3 sync "{{ S3_BUCKET_MEDIA_FILES }}" "{{ ascs_installer_dest_folder }}"
+  register: download_output
+  until: download_output is not failed
+  retries: 5
+
+- name: Fail if no ASCS installation file was downloaded
+  find:
+    paths: "{{ item }}"
+  register: filesFound
+  failed_when: filesFound.matched == 0
+  loop:
+    - "{{ ascs_complete_kernel_install_folder }}"
+    - "{{ ascs_complete_swpm_install_folder }}"
+    - "{{ ascs_complete_sapcar_install_folder }}"

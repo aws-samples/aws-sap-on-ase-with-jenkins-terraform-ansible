@@ -1,0 +1,11 @@
+---
+
+# required for installation and configuration tasks:
+- name: Gather package facts
+  ansible.builtin.package_facts:
+
+- name: Gather system services facts
+  ansible.builtin.service_facts:
+
+- name: Check SUSE System Roles for SAP
+  include_tasks: ../tasks/sapnote/1275776.yml

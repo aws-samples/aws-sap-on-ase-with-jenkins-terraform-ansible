@@ -1,0 +1,7 @@
+- hosts: localhost
+  connection: local 
+  vars:
+    sap_general_preconfigure_reboot_ok: false
+    sap_general_preconfigure_fail_if_reboot_required: false
+  roles:
+    - sap_general_preconfigure

@@ -1,0 +1,8 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Automate RHEL provisioning solution for SAP, including kernel parameters, additional rpms, network settings, and so on
+  ansible.builtin.command: "sapconf"
+  register: sapconf_output

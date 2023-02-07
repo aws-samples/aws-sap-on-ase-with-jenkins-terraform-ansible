@@ -1,0 +1,26 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+ascs_product_id_to_install: "{{ GLOBAL_ASCS_PRODUCT_ID | default('NW_ABAP_ASCS:NW750.SYB.ABAP') }}"
+
+ascs_installer_dest_folder: /sapmnt/software
+
+ascs_complete_kernel_install_folder: "{{ ascs_installer_dest_folder }}/Kernel"
+ascs_complete_swpm_install_folder: "{{ ascs_installer_dest_folder }}/SWPM"
+ascs_complete_sapcar_install_folder: "{{ ascs_installer_dest_folder }}/SAPCAR"
+ascs_complete_swpm_sum_install_folder: "{{ ascs_installer_dest_folder }}/SWPM-SUM"
+
+sap_installation_folder: /sap-installation
+
+ascs_folder_to_run_installation_from: "{{ sap_installation_folder }}/ascs-installation"
+ers_folder_to_run_installation_from: "{{ sap_installation_folder }}/ers-installation"
+ascs_params_file_full_path: "{{ ascs_installer_dest_folder }}/ascs.params"
+ers_params_file_full_path: "{{ ascs_installer_dest_folder }}/ers.params"
+
+sapinst_user_group_name: sapinst
+
+# Variables for the ascs.params template file
+sap_sys_gid: 1003
+sid_adm_uid: 1004

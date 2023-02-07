@@ -1,0 +1,30 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+pas_product_id_to_install : "{{ GLOBAL_PAS_PRODUCT_ID | default('NW_ABAP_CI:NW750.SYB.ABAP') }}"
+
+installation_root_path: /sapmnt
+pas_installer_software_folder: "{{ installation_root_path }}/software"
+pas_installer_dest_folder: "{{ pas_installer_software_folder }}"
+swpm_dest_folder: "{{ pas_installer_software_folder }}/SWPM"
+swpm_sum_install_dest_folder: "{{ pas_installer_software_folder }}/SWPM-SUM-PAS"
+sapcar_dest_folder: "{{ pas_installer_software_folder }}/SAPCAR"
+kernel_dest_folder: "{{ pas_installer_software_folder }}/Kernel"
+install_export_dest_folder: "{{ pas_installer_software_folder }}/Exports"
+
+profile_data_dir: "{{ installation_root_path }}/{{ GLOBAL_PAS_SID }}/profile"
+
+nw75_unarchived_folder: "{{ install_export_dest_folder }}/DATA_UNITS"
+
+sapinst_user_group_name: sapinst
+sap_inst_gid: "1005"
+folder_to_run_pas_installation_from: /sap-installation/pas-installation
+pas_params_file_full_path: "{{ pas_installer_software_folder }}/pas.params"
+
+# Variables for db.params and pas.params
+sidadm_name: "{{ GLOBAL_PAS_SID|lower }}adm"
+sap_instance_number: "{{ GLOBAL_PAS_INSTANCE_NUMBER }}"
+sid_adm_uid: "1004"
+sap_sys_gid: "1003"

@@ -1,0 +1,4 @@
+---
+
+- name: Configure 1391070 - uuidd
+  import_tasks: ../../Suse/generic/configure-uuidd.yml

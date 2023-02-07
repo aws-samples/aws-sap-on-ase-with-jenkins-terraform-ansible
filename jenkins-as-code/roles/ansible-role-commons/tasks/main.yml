@@ -1,0 +1,7 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Install JQ
+  include_tasks: install_jq.yml

@@ -1,0 +1,4 @@
+---
+
+- name: SAP note 1275776 Step - Configure the Firewall
+  import_tasks: ../../Suse/generic/configure-firewall.yml

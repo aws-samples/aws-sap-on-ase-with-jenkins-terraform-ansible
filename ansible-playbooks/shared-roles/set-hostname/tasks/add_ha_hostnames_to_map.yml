@@ -1,0 +1,8 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Create map for ASCS/ERS
+  include_tasks: add_ha_hostnames_to_map_ascs_ers.yml
+  when: GLOBAL_ERS_SID is defined or GLOBAL_ASCS_SID is defined

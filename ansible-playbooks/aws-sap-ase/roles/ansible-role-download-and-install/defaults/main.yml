@@ -1,0 +1,47 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+sap_install_error: "There was an error on your SAP installation. Please check the output and the logs"
+standard_sap_install_error_msg: "Configuration error (batch mode):\n  SAP ASE System ID '{{ GLOBAL_ASE_SID }}' is already in use by a SAP ASE Database instance!"
+
+already_installed_error_message: "SAP ASE System ID '{{ GLOBAL_ASE_SID }}' is already in use by a SAP ASE Database instance!"
+
+db_product_id_to_install: "{{ GLOBAL_PAS_DB_PRODUCT_ID | default('NW_ABAP_DB:NW750.SYB.ABAP') }}"
+
+installation_root_path: /sapmnt
+
+db_installer_software_folder: "{{ installation_root_path }}/software"
+db_installer_dest_folder: "{{ db_installer_software_folder }}"
+swpm_dest_folder: "{{ db_installer_software_folder }}/SWPM"
+swpm_sum_install_dest_folder: "{{ db_installer_software_folder }}/SWPM-SUM"
+sapcar_dest_folder: "{{ db_installer_software_folder }}/SAPCAR"
+kernel_dest_folder: "{{ db_installer_software_folder }}/Kernel"
+install_export_dest_folder: "{{ db_installer_software_folder }}/Exports"
+
+db_dest_file_path:  "{{ db_installer_software_folder }}/SAPASE"
+db_unarchived_folder: "{{ db_dest_file_path }}/unarchived"
+
+nw75_unarchived_folder: "{{ install_export_dest_folder }}/DATA_UNITS"
+
+profile_data_dir: "{{ installation_root_path }}/{{ GLOBAL_PAS_SID }}/profile"
+
+sapinst_user_group_name: sapinst
+folder_to_run_db_installation_from: /sap-installation/db-installation
+
+db_params_file_full_path: "{{ db_installer_software_folder }}/sybase.params"
+
+# #Directory for Sybase Installation
+ase_data_folder: /sybase/{{ GLOBAL_ASE_SID }}/sapdata
+ase_log_folder: /sybase/{{ GLOBAL_ASE_SID }}/logdir
+ase_temp_folder: /sybase/{{ GLOBAL_ASE_SID }}/saptemp
+ase_sapdiag_folder: /sybase/{{ GLOBAL_ASE_SID }}/sapdiag
+sybase_folder: /sybase/{{ GLOBAL_ASE_SID }}
+
+# # Variables for db.params and pas.params
+sidadm_name: "{{ GLOBAL_PAS_SID|lower }}adm"
+sap_instance_number: "{{ GLOBAL_PAS_INSTANCE_NUMBER }}"
+sid_adm_uid: "1004"
+sap_sys_gid: "1003"
+sap_inst_gid: "1005"

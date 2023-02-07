@@ -1,0 +1,40 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Check if reboot is needed (RHEL)
+  include_tasks: check_reboot_is_needed_redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Check if reboot is needed (SUSE)
+  include_tasks: check_reboot_is_needed_suse.yml
+  when: ansible_os_family == 'Suse'
+  
+- name: Download Files from S3 to Local
+  include_tasks: download_db_sybase.yml
+
+- name: Check if users were already created by a previous run of installation
+  include_tasks: check_sap_users.yml
+
+- name: Prepare installation users and directories
+  include_tasks: prepare_install_dirs_and_fix_users.yml
+  when: sidadm_user_output is changed
+
+- name: Prepare installation files
+  include_tasks: prepare_sybase_install_files.yml
+
+- name: Prepare installation files
+  include_tasks: prepare_nw_install_files.yml
+
+- name: Create params files
+  include_tasks: create_ini_files.yml
+
+- name: Install DB Instance
+  include_tasks: install_pas_db.yml
+
+- name: Check if installation finished well
+  include_tasks: check_installation.yml
+
+- name: Remove used credentials
+  include_tasks: remove_credentials.yml

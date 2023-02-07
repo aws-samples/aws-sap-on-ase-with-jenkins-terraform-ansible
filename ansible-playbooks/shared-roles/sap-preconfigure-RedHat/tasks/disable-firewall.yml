@@ -1,0 +1,12 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Disable service firewalld
+  ansible.builtin.command: "systemctl disable firewalld"
+  register: firewall_disable_output
+
+- name: Stop service firewalld
+  ansible.builtin.command: "systemctl stop firewalld"
+  register: firewall_stop_output

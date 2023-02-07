@@ -1,0 +1,40 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+# Required variables caught from the user
+GLOBAL_INPUT_HOSTNAME: "{{ EC2_HOSTNAME }}"
+GLOBAL_INPUT_DNS_ZONE: "{{ PRIVATE_DNS_ZONE }}"
+GLOBAL_MASTER_PASSWORD: "{{ MASTER_PASSWORD }}"
+
+GLOBAL_DB_NAME: "{{ DATABASE }}"
+INPUT_CUSTOM_TIMEZONE: "{{ INPUT_CUSTOM_TIMEZONE }}"
+
+# Removes trailing slashes
+GLOBAL_S3_BUCKET_MEDIA_FILES: "{{ S3_BUCKET_MEDIA_FILES | regex_replace('\\/$', '') }}"
+GLOBAL_EFS_ID: "{{ SAPMNT_EFS_ID }}"
+
+# Optional variables caught from the user
+GLOBAL_ASCS_PRIVATE_IP: "{{ ASCS_PRIVATE_IP }}"
+GLOBAL_ASCS_HOSTNAME: "{{ ASCS_HOSTNAME }}"
+GLOBAL_ASCS_SID: "{{ ASCS_SID }}"
+GLOBAL_ASCS_INSTANCE_NUMBER: "{{ ASCS_INSTANCE_NUMBER }}"
+
+GLOBAL_PAS_SID: "{{ PAS_SID }}"
+GLOBAL_PAS_PRIVATE_IP: "{{ PAS_PRIVATE_IP }}"
+GLOBAL_PAS_HOSTNAME: "{{ PAS_HOSTNAME }}"
+
+GLOBAL_ASE_SID: "{{ ASE_SID }}"
+GLOBAL_ASE_PRIVATE_IP: "{{ ASE_PRIVATE_IP }}"
+GLOBAL_ASE_HOSTNAME: "{{ EC2_HOSTNAME }}"
+
+# Optional HA variables
+GLOBAL_ENABLE_HA: "{{ ENABLE_HA }}"
+GLOBAL_PRIMARY_IP: "{{ ASCS_PRIVATE_IP }}"
+GLOBAL_NODE_IPS: "{{ HA_NODE_PRIVATE_IPS | regex_replace('\\,$', '') }}"
+GLOBAL_NODE_IPS_LIST: ""
+
+# # Variables shared between roles
+GLOBAL_LOGS_AND_FOLDERS_ROLE_NAME: ../shared-roles/prepare-logs-folders
+sap_domain: "{{ GLOBAL_INPUT_DNS_ZONE }}"

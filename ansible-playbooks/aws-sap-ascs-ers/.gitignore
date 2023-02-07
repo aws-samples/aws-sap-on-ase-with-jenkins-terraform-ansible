@@ -1,0 +1,5 @@
+Vagrantfile
+requirements_local.yml
+hosts_local.yml
+*.DS_Store
+.github

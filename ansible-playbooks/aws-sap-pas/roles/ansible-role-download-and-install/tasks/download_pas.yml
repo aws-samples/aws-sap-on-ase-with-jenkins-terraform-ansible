@@ -1,0 +1,33 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Create PAS destination folder
+  file:
+    path: "{{ pas_installer_dest_folder }}"
+    state: directory
+
+- name: Download Installation files from S3 bucket. This is a big download - So hang on since it may take several minutes
+  shell: aws s3 sync "{{ GLOBAL_PAS_S3_DOWNLOAD_BUCKET_URL }}" "{{ pas_installer_dest_folder }}"
+  register: download_output
+  until: download_output is not failed
+  retries: 5
+
+- name: Fail if no DB installation files were downloaded
+  find:
+    paths: "{{ item }}"
+  register: filesFound
+  failed_when: filesFound.matched == 0
+  loop:
+    - "{{ kernel_dest_folder }}"
+    - "{{ swpm_dest_folder }}"
+    - "{{ sapcar_dest_folder }}"
+    - "{{ install_export_dest_folder }}"
+
+- name: Ensure installation folders exist and have right permissions
+  file:
+    path: "{{ pas_installer_software_folder }}"
+    state: directory
+    mode: 0777
+    recurse: yes

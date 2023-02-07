@@ -1,0 +1,35 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+# Required variables caught from the user
+ GLOBAL_INPUT_HOSTNAME: "{{ EC2_HOSTNAME }}"
+ GLOBAL_INPUT_DNS_ZONE: "{{ PRIVATE_DNS_ZONE }}"
+ GLOBAL_MASTER_PASSWORD: "{{ MASTER_PASSWORD }}"
+ GLOBAL_SAPMNT_EFS_ID: "{{ SAPMNT_EFS_ID }}"
+ GLOBAL_TRANS_EFS_ID: "{{ TRANS_EFS_ID }}" 
+
+
+ INPUT_CUSTOM_TIMEZONE: "{{ INPUT_CUSTOM_TIMEZONE }}"
+ GLOBAL_PRODUCT_TO_INSTALL: "{{ PRODUCT_TO_INSTALL | default('') }}"
+ GLOBAL_ASCS_SID: "{{ ASCS_SID }}"
+ GLOBAL_ASCS_INSTANCE_NUMBER: "{{ ASCS_INSTANCE_NUMBER }}"
+
+# Removes trailing slashes
+ GLOBAL_S3_DOWNLOAD_BUCKET_URL: "{{ S3_BUCKET_MEDIA_FILES | regex_replace('\\/$', '') }}"
+ GLOBAL_ASE_PRIVATE_IP: "{{ ASE_PRIVATE_IP }}"
+ GLOBAL_ASE_HOSTNAME: "{{ ASE_HOSTNAME }}"
+
+# Optional variables caught from the user
+ GLOBAL_PAS_PRIVATE_IP: "{{ PAS_PRIVATE_IP }}"
+ GLOBAL_PAS_HOSTNAME: "{{ PAS_HOSTNAME }}"
+ GLOBAL_ASCS_PRIVATE_IP: "{{ ASCS_PRIVATE_IP }}"
+ GLOBAL_ASCS_HOSTNAME: "{{ ASCS_HOSTNAME }}"
+
+# Optional HA variables
+ GLOBAL_ENABLE_HA: "{{ ENABLE_HA }}"
+ GLOBAL_PRIMARY_IP: "{{ ASCS_PRIVATE_IP }}"
+
+ GLOBAL_LOGS_AND_FOLDERS_ROLE_NAME: ../shared-roles/prepare-logs-folders
+ sap_domain: "{{ GLOBAL_INPUT_DNS_ZONE }}"

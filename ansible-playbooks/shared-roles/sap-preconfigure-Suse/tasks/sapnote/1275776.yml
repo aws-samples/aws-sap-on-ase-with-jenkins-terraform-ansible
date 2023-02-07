@@ -1,0 +1,30 @@
+---
+
+- name: Configure - Display SAP note number 1275776 and its version
+  debug:
+    msg: "SAP note {{ (__sap_preconfigure_sapnotes_versions | selectattr('number', 'match', '^1275776$') | first).number }}
+          (version {{ (__sap_preconfigure_sapnotes_versions | selectattr('number', 'match', '^1275776$') | first).version }}): Linux: Preparing SLES for SAP environments"
+
+- import_tasks: 1275776/01-configure-hostname.yml
+  when: sap_preconfigure_config_all|d(true)
+
+- import_tasks: 1275776/03-configure-firewall.yml
+  when: sap_general_preconfigure_use_netweaver_repos|d(true)
+
+- import_tasks: 1275776/04-configure-saptune.yml
+  when: sap_general_preconfigure_use_netweaver_repos|d(true) and ansible_distribution == 'SLES_SAP'
+
+- import_tasks: 1275776/04-apply-saptune-notes.yml
+  when: sap_general_preconfigure_use_netweaver_repos|d(true) and ansible_distribution == 'SLES_SAP'
+
+- import_tasks: 1275776/04-apply-saptune-solutions.yml
+  when: sap_general_preconfigure_use_netweaver_repos|d(true) and ansible_distribution == 'SLES_SAP'
+
+- import_tasks: 1275776/05-configure-sapconf.yml
+  when: sap_general_preconfigure_use_netweaver_repos|d(true) and ansible_distribution != 'SLES_SAP'
+
+- import_tasks: 1275776/06-configure-sysstat.yml
+  when: sap_general_preconfigure_use_netweaver_repos|d(true)
+
+- import_tasks: 1275776/07-configure-uuidd.yml
+  when: sap_general_preconfigure_use_netweaver_repos|d(true)

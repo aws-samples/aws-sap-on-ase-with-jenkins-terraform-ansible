@@ -1,0 +1,33 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Search for SAPEXE file
+  find:
+    paths: "{{ kernel_dest_folder }}/"
+    patterns: 'SAPEXE_*SAR'
+  register: sapexe_found
+  failed_when: sapexe_found.matched != 1
+
+- name: Store SAPEXE file full path
+  set_fact: sap_exe_full_path="{{ sapexe_found.files[0].path }}"
+
+- name: Prepare SAP ASE Media file location
+  find:
+    paths: "{{ db_unarchived_folder }}"
+    file_type: directory
+    patterns: 'BD_SYBASE_ASE_*._BS_' 
+  register: sybase_ase_found
+  failed_when: sybase_ase_found.matched != 1
+
+- name: Store SAP ASE Media file
+  set_fact: db_install_media_file="{{ sybase_ase_found.files[0].path }}"
+
+- name: Create params file for DB installation
+  template:
+    src: "{{ item.file_name }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - file_name: sybase.params
+      dest: "{{ db_params_file_full_path }}"

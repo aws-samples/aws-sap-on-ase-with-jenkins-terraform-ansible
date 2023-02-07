@@ -1,0 +1,6 @@
+*.terraform*
+*.vagrant*
+Vagrantfile
+packerfile.json
+*.DS_Store
+.github

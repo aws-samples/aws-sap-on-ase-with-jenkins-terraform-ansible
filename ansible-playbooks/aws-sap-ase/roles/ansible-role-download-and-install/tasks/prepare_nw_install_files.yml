@@ -1,0 +1,51 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Find SWPM .SAR file
+  find:
+    paths: "{{ swpm_dest_folder }}/"
+    patterns: 'SWPM*SAR'
+  register: filesFound
+  failed_when: filesFound.matched == 0
+
+- name: Set fact with found file name
+  set_fact: sar_file="{{ filesFound.files.0.path }}"
+
+- name: Check if SWPM folder was already unzipped
+  find:
+    paths: "{{ swpm_sum_install_dest_folder }}/"
+  register: unzipped_stat
+
+- name: Use a single pattern that contains a comma formatted as a list
+  find:
+    paths: "{{ sapcar_dest_folder }}"
+    patterns: 'SAPCAR*'
+  register: filename
+
+- name: Unarchive SWPM files
+  shell: "{{ filename.files.0.path }} -xvf {{ sar_file }} -R {{ swpm_sum_install_dest_folder }}"
+  when: unzipped_stat.matched == 0
+
+- name: Find NW Export ZIP file and Add to Full Path
+  find:
+    paths: "{{ install_export_dest_folder }}"
+    patterns: '*.ZIP'
+  register: nw75_export_zip
+  failed_when: nw75_export_zip.matched == 0
+
+- name: Set fact with found file name
+  set_fact: nw75_file_full_path="{{ nw75_export_zip.files.0.path }}"
+
+- name: Check if the Export file was already unarchived
+  stat:
+    path: "{{ install_export_dest_folder }}/DATA_UNITS/EXP1"
+  register: export_folder_stat
+
+- name: Unarchive Export ZIP file
+  unarchive:
+    src: "{{ nw75_file_full_path }}"
+    remote_src: yes
+    dest: "{{ install_export_dest_folder }}"
+  when: not export_folder_stat.stat.exists

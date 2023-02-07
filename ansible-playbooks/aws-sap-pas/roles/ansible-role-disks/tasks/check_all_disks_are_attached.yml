@@ -1,0 +1,24 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Set the Variable for Xen
+  set_fact: system_type_xen="{{ system_type_xen }}"
+
+- name: Set the Variable for Nitro
+  set_fact: system_type_nitro="{{ system_type_nitro }}"
+
+- name: Check if all required disks are attached (Xen)
+  set_fact: filtered_disks="{{ ansible_devices | map('regex_search', '^' + regex_to_look_for_disks ) | select ('string') | list }}"
+  failed_when: "filtered_disks | length < minimum_number_of_mounted_disks_to_search"
+  retries: 60
+  delay: 5
+  when: system_type_for_mount_disks == system_type_xen 
+
+- name: Check if all required disks are attached (Nitro)
+  set_fact: filtered_disks="{{ ansible_devices | map('regex_search', '^' + regex_to_look_for_disks_nitro ) | select ('string') | list }}"
+  failed_when: "filtered_disks | length < minimum_number_of_mounted_disks_to_search"
+  retries: 60
+  delay: 5
+  when: system_type_for_mount_disks == system_type_nitro

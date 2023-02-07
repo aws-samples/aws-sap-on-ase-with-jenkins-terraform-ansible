@@ -1,0 +1,4 @@
+---
+
+- name: Configure 1275776 - sysstat
+  import_tasks: ../../Suse/generic/configure-sysstat.yml

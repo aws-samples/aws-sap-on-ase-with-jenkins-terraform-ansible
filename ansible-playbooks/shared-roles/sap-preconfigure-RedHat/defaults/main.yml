@@ -1,0 +1,12 @@
+# ---
+
+# defaults file for RedHat preconfigure using rhel-system-roles-sap
+
+rhel_packages:
+  - rhel-system-roles-sap
+
+playbook_dest_folder: /tmp
+ansible_playbook_general_run: ansible-playbook sap_general_preconfigure.yml
+ansible_playbook_netweaver_run: ansible-playbook sap_netweaver_preconfigure.yml
+
+ 

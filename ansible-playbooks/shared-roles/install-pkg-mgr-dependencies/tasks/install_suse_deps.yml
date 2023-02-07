@@ -1,0 +1,24 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Install ZYPPER dependencies
+  zypper:
+    name: "{{ suse_packages }}"
+    state: present
+  register: log_output
+
+- name: Register logs
+  lineinfile:
+    name: "{{ GLOBAL_CENTRAL_LOG_FILE_PATH }}"
+    line: "{{ ansible_date_time.date }} {{ ansible_date_time.time }} {{ ansible_date_time.tz }} - {{ log_output }}"
+    state: present
+    insertafter: EOF
+  ignore_errors: true
+
+- name: Update all packages (SUSE)
+  zypper:
+    name: '*'
+    state: latest
+  ignore_errors: true

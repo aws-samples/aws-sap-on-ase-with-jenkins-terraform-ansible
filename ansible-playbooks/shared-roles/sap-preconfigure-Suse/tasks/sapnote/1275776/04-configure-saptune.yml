@@ -1,0 +1,4 @@
+---
+
+- name: Configure 1275776 - saptune
+  import_tasks: ../../Suse/generic/configure-saptune.yml

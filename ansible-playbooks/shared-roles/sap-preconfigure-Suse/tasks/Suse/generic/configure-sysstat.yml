@@ -1,0 +1,15 @@
+---
+
+- name: 2578899 - Installation sysstat
+  ansible.builtin.package:
+    name: "sysstat"
+
+- name: "2578899 - Enable sysstat"
+  ansible.builtin.command: "systemctl enable sysstat"
+  register: __sap_preconfigure_register_sysstat_service
+  changed_when: __sap_preconfigure_register_sysstat_service.rc == 0
+
+- name: "2578899 - Start sysstat"
+  ansible.builtin.command: "systemctl start sysstat"
+  register: __sap_preconfigure_register_sysstat_service
+  changed_when: __sap_preconfigure_register_sysstat_service.rc == 0

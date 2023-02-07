@@ -1,0 +1,30 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Copy sap_general_preconfigure.yml template to rhel host
+  template:
+    src: sap_general_preconfigure.yml
+    dest: "{{ playbook_dest_folder }}"
+    mode: 0777
+
+- name: Copy sap_netweaver_preconfigure.yml template to rhel host
+  template:
+    src: sap_netweaver_preconfigure.yml
+    dest: "{{ playbook_dest_folder }}"
+    mode: 0777
+
+- name: Run Ansible Playbook sap-general-preconfigure roles locally on the RHEL Server
+  shell: 
+    chdir: "{{ playbook_dest_folder }}"
+    cmd: "{{ ansible_playbook_general_run }}"
+  register: installation_general_output
+  ignore_errors: yes
+
+- name: Run Ansible Playbook sap_netweaver_preconfigure roles locally on the RHEL Server
+  shell: 
+    chdir: "{{ playbook_dest_folder }}"
+    cmd: "{{ ansible_playbook_netweaver_run }}"
+  register: installation_netweaver_output
+  ignore_errors: yes

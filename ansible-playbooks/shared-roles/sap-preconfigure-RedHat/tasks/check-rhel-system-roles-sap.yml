@@ -1,0 +1,9 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Ensure required packages rhel-system-roles-sap for SAP NetWeaver installed
+  package:
+    state: present
+    name: "{{ rhel_packages }}"

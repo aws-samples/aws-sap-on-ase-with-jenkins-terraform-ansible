@@ -1,0 +1,49 @@
+---
+# Apply saptune notes 
+
+- name: "1275776 - saptune - apply note 1410736"
+  ansible.builtin.command: "saptune note apply 1410736"
+  register: __sap_nw_preconfigure_register_saptune_notes
+  changed_when: __sap_nw_preconfigure_register_saptune_notes.rc == 0
+
+- name: "1275776 - Configuration saptune 1656250"
+  ansible.builtin.command: "saptune note apply 1656250"
+  register: __sap_nw_preconfigure_register_saptune_notes
+  changed_when: __sap_nw_preconfigure_register_saptune_notes.rc == 0
+
+- name: "1275776 - saptune - apply note 1771258"
+  ansible.builtin.command: "saptune note apply 1771258"
+  register: __sap_nw_preconfigure_register_saptune_notes
+  changed_when: __sap_nw_preconfigure_register_saptune_notes.rc == 0
+
+- name: "1275776 - saptune - apply note 2161991"
+  ansible.builtin.command: "saptune note apply 2161991"
+  register: __sap_nw_preconfigure_register_saptune_notes
+  changed_when: __sap_nw_preconfigure_register_saptune_notes.rc == 0
+
+- name: "1275776 - saptune - apply note 2578899"
+  ansible.builtin.command: "saptune note apply 2578899"
+  register: __sap_nw_preconfigure_register_saptune_notes
+  changed_when: __sap_nw_preconfigure_register_saptune_notes.rc == 0
+
+- name: "1275776 - saptune - apply note 900929"
+  ansible.builtin.command: "saptune note apply 900929"
+  register: __sap_nw_preconfigure_register_saptune_notes
+  changed_when: __sap_nw_preconfigure_register_saptune_notes.rc == 0
+
+- name: "1275776 - saptune - apply note 941735"
+  ansible.builtin.command: "saptune note apply 941735"
+  register: __sap_nw_preconfigure_register_saptune_notes
+  changed_when: __sap_nw_preconfigure_register_saptune_notes.rc == 0
+
+- name: "1275776 - saptune - apply note 1680803"
+  ansible.builtin.command: "saptune note apply 1680803"
+  register: __sap_nw_preconfigure_register_saptune_notes
+  changed_when: __sap_nw_preconfigure_register_saptune_notes.rc == 0
+  when: sap_preconfigure_saptune_solutions == 'ase'
+
+- name: "1275776 - saptune - apply note 1805750"
+  ansible.builtin.command: "saptune note apply 1805750"
+  register: __sap_nw_preconfigure_register_saptune_notes
+  changed_when: __sap_nw_preconfigure_register_saptune_notes.rc == 0
+  when: sap_preconfigure_saptune_solutions == 'ase' 

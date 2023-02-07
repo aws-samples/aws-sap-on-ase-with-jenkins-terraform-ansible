@@ -1,0 +1,8 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Set Instance hostname HA for ASCS/ERS
+  include_tasks: set_instance_hostname_ha_ascs_ers.yml
+  when: GLOBAL_ERS_SID is defined or GLOBAL_ASCS_SID is defined

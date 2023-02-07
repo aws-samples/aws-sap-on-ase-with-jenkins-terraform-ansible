@@ -1,0 +1,16 @@
+# ---
+
+# defaults file for sap_general_preconfigure for SUSE
+
+sap_preconfigure_modify_etc_hosts: yes
+
+sap_hostname: "{{ ansible_hostname }}"
+
+__sap_preconfigure_sapnotes_versions:
+  - { number: '1275776', version: '39' }
+
+sap_preconfigure_max_hostname_length: '13'
+
+sap_domain: "{{ ansible_domain }}"
+
+sap_ip: "{{ ansible_default_ipv4.address }}"

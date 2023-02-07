@@ -1,0 +1,16 @@
+---
+
+
+- name: "1275776 - saptune - apply solution NETWEAVER"
+  ansible.builtin.command: "saptune solution apply NETWEAVER"
+  register: __sap_nw_preconfigure_register_saptune_solution
+  changed_when: __sap_nw_preconfigure_register_saptune_solution.rc == 0
+  ignore_errors: yes
+  when: sap_preconfigure_saptune_solutions == 'netweaver'
+
+- name: "1275776 - saptune - apply solution Sybase ASE"
+  ansible.builtin.command: "saptune solution apply SAP-ASE"
+  register: __sap_nw_preconfigure_register_saptune_solution
+  changed_when: __sap_nw_preconfigure_register_saptune_solution.rc == 0
+  ignore_errors: yes
+  when: sap_preconfigure_saptune_solutions == 'ase'

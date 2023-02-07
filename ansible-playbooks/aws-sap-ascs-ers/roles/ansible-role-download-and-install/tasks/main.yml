@@ -1,0 +1,36 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Check if reboot is needed (RHEL)
+  include_tasks: check_reboot_is_needed_redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Check if reboot is needed (RHEL)
+  include_tasks: check_reboot_is_needed_suse.yml
+  when: ansible_os_family == 'Suse'
+
+- name: Check which product has to be installed
+  include_tasks: check_product.yml
+
+- name: Download Installation media
+  include_tasks: download_media.yml
+    
+- name: Create params file
+  include_tasks: create_params_file.yml
+
+- name: Prepare installation variables
+  include_tasks: prepare_install_vars.yml
+
+- name: Prepare installation users
+  include_tasks: prepare_install_users.yml
+
+- name: Prepare installation files
+  include_tasks: prepare_install_files.yml
+
+- name: Install & Check
+  include_tasks: install.yml
+
+- name: Remove used credentials
+  include_tasks: remove_credentials.yml

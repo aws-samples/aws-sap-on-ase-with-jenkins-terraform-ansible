@@ -1,0 +1,13 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+input_custom_timezone: "{{ INPUT_CUSTOM_TIMEZONE }}"
+
+default_instance_timezone: America/Chicago
+
+install_ssm: true
+
+aws_installer_dir: /tmp/aws
+
+aws_cli_installer_error_duplicate: "Found preexisting AWS CLI installation"

@@ -1,0 +1,36 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Create the disk mapping file (Xen)
+  include_tasks: create_disk_mapping_file_xen.yml
+  when: system_type_for_mount_disks == system_type_xen 
+
+- name: Create the disk mapping file (Nitro)
+  include_tasks: create_disk_mapping_file_nitro.yml
+  when: system_type_for_mount_disks == system_type_nitro
+
+- name: Mount disks ASE Home
+  include_tasks: mount_disk_ase_home.yml
+
+- name: Mount disks ASE Data
+  include_tasks: mount_disk_ase_data.yml
+
+- name: Mount disks ASE Logs
+  include_tasks: mount_disk_ase_logs.yml
+
+- name: Mount disks ASE Shared
+  include_tasks: mount_disk_ase_tmp.yml
+
+- name: Mount disks ASE Backup
+  include_tasks: mount_disk_ase_usr_sap.yml
+
+- name: Mount disks for Temp
+  include_tasks: mount_disk_ase_sapdiag.yml
+
+- name: Mount disks for Swap
+  include_tasks: check_swap_enabled.yml
+
+- name: Mount shared EFS
+  include_tasks: mount_disk_sapmnt.yml

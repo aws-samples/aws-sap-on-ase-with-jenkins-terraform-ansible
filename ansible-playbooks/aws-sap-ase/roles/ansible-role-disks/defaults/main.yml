@@ -1,0 +1,90 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+# Variables to check disks mounted
+regex_to_look_for_disks_nitro: "nvme\\w*n1\\b"
+regex_to_look_for_disks: "xvd\\w*"
+system_type_for_mount_disks: "Xen"
+system_type_xen: "Xen"
+system_type_nitro: "Nitro"
+minimum_number_of_mounted_disks_to_search: 5
+
+grep_find_command: grep /dev/xvd
+awk_position_command: awk '{ print $18 }'
+sed_replace_command: sed -e 's/"//g' -e 's/\.*//g'
+
+sybase_folder: /sybase/{{ GLOBAL_ASE_SID }}
+
+disk_mapping_file_full_path: /tmp/diskmap
+
+etc_fstab_full_path: /etc/fstab
+
+folders_to_create:
+  - /sybase/{{ GLOBAL_ASE_SID }}
+  - /sybase/{{ GLOBAL_ASE_SID }}/sapdiag
+  - /sybase/{{ GLOBAL_ASE_SID }}/sapdata
+  - /sybase/{{ GLOBAL_ASE_SID }}/saptemp
+  - /sybase/{{ GLOBAL_ASE_SID }}/logdir
+  - /sapmnt
+  - /usr/sap/
+
+# Variables for /usr/sap disk
+sap_folder: /usr/sap
+volume_group_sap: vg_usrsap
+logical_volume_sap: lv_usrsap
+
+sap_disk_type_pattern:
+  - xvdq
+
+# Variables for /sybase home disk
+ase_home_folder: /sybase/{{ GLOBAL_ASE_SID }}
+volume_group_ase_home: vg_sybase_home
+logical_volume_ase_home: lv_sybase_home
+
+ase_home_disk_type_pattern:
+  - xvdo
+
+# Variables for mounting DATA disks
+ase_data_folder: /sybase/{{ GLOBAL_ASE_SID }}/sapdata
+volume_group_ase_data: vg_ase_data
+logical_volume_ase_data: lv_ase_data
+
+ase_data_disk_type_pattern:
+  - xvdf
+
+# Variables for mounting LOG disks
+ase_log_folder: /sybase/{{ GLOBAL_ASE_SID }}/logdir
+volume_group_ase_log: vg_ase_log
+logical_volume_ase_log: lv_ase_log
+
+ase_log_disk_type_pattern:
+  - xvdm
+
+# Variables for mounting temp disks
+ase_temp_folder: /sybase/{{ GLOBAL_ASE_SID }}/saptemp
+volume_group_temp: vg_ase_temp
+logical_volume_temp: lv_ase_temp
+
+ase_temp_disk_type_pattern:
+  - xvdj
+
+# Variables for mounting SAP disks
+ase_sapdiag_folder: /sybase/{{ GLOBAL_ASE_SID }}/sapdiag
+volume_group_ase_sapdiag: vg_usrsapdiag
+logical_volume_ase_sapdiag: lv_usrsapdiag
+
+ase_sapdiag_disk_type_pattern:
+  - xvdi
+
+# Variables for mounting SWAP disks
+ase_swap: /swap
+volume_group_ase_swap: vg_swap
+logical_volume_ase_swap: lv_swap
+
+ase_swap_disk_type_pattern:
+  - xvdr
+
+# Variables for /sapmnt disk
+sapmnt_folder: /sapmnt

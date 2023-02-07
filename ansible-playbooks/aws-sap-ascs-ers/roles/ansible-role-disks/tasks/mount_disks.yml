@@ -1,0 +1,24 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Create the disk mapping file for Xen
+  include_tasks: create_disk_mapping_file_xen.yml
+  when: system_type_for_mount_disks == system_type_xen 
+
+- name: Create the disk mapping file for Nitro
+  include_tasks: create_disk_mapping_file_nitro.yml
+  when: system_type_for_mount_disks == system_type_nitro
+
+- name: Mount disks USR SAP
+  include_tasks: mount_disk_usr_sap.yml
+
+- name: Mount FileSystem SAPMNT
+  include_tasks: mount_disk_sapmnt.yml
+
+- name: Mount FileSystem SAP TRANS
+  include_tasks: mount_disk_saptrans.yml
+
+- name: Mount disks for Swap
+  include_tasks: check_swap_enabled.yml

@@ -1,0 +1,8 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Check Ansible devices
+  set_fact: system_type_for_mount_disks="{{ system_type_nitro }}"
+  when: ansible_devices.keys() is regex(regex_to_look_for_disks_nitro)

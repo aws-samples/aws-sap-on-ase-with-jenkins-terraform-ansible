@@ -1,0 +1,5 @@
+---
+
+- name: Set product to be installed as ASCS for primary
+  set_fact: GLOBAL_PRODUCT_TO_INSTALL="ASCS"
+  when: ansible_default_ipv4.address == GLOBAL_PRIMARY_IP

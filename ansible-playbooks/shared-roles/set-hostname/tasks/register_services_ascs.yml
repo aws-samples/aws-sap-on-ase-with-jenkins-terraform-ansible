@@ -1,0 +1,23 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Check if sapms<SID> were already added to /etc/services
+  lineinfile:
+    name: "/etc/services"
+    regexp: "^sapms{{ GLOBAL_ASCS_SID }}"
+    state: absent
+  check_mode: yes
+  changed_when: false
+  register: line_is_present
+  with_items: "{{ extra_vars_to_add_to_services }}"
+
+- name: Add found sapms<SID> to /etc/services
+  lineinfile:
+    name: "/etc/services"
+    line: "sapms{{ GLOBAL_ASCS_SID }}        36{{ GLOBAL_ASCS_INSTANCE_NUMBER }}/tcp        # SAP System Message Server Port"
+    state: present
+    insertafter: EOF
+  when: not item.found
+  with_items: "{{ line_is_present.results }}"

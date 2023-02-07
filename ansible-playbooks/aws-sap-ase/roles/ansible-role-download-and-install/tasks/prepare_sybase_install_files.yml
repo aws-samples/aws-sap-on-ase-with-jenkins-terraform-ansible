@@ -1,0 +1,34 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Find the SAPASE ZIP file and Add to Full Path
+  find:
+    paths: "{{ db_dest_file_path }}"
+    patterns: '*.ZIP'
+  register: sybase_ase_zip
+  failed_when: sybase_ase_zip.matched == 0
+
+- name: Set fact with found file name
+  set_fact: db_file_full_path="{{ sybase_ase_zip.files.0.path }}"
+
+- name: Check SAP ASE Media file unarchived
+  find:
+    paths: "{{ db_unarchived_folder }}"
+    file_type: directory
+  register: sybase_ase_found
+
+- name: Unarchive SAP ASE file if not unarchived
+  unarchive:
+    src: "{{ db_file_full_path }}"
+    remote_src: yes
+    dest: "{{ db_unarchived_folder }}"
+  when: sybase_ase_found.matched == 0
+
+- name: Ensure installation folders exist and have right permissions
+  file:
+    path: "{{ db_installer_software_folder }}"
+    state: directory
+    mode: 0777
+    recurse: yes

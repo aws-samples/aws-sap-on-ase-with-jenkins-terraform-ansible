@@ -1,0 +1,4 @@
+---
+
+- name: Configure 1275776 - sapconf
+  import_tasks: ../../Suse/generic/configure-sapconf.yml

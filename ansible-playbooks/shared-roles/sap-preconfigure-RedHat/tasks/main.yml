@@ -1,0 +1,18 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+- name: Check RHEL System Roles for SAP
+  include_tasks: check-rhel-system-roles-sap.yml
+
+- name: Configure and Run RHEL System Roles Playbook for SAP
+  include_tasks: install-rhel-system-roles-sap.yml
+
+- name: Run sapconf
+  include_tasks: install-sapconf.yml
+
+- name: Stop and disable service firewalld
+  include_tasks: disable-firewall.yml
+
+  

@@ -1,0 +1,11 @@
+---
+
+- name: 1275776 - Installation sapconf
+  ansible.builtin.package:
+    name: "sapconf"
+
+- name: "1275776 - Configuration sapconf"
+  ansible.builtin.command: "systemctl enable --now sapconf.service"
+  register: __sap_preconfigure_register_sapconf_service
+  changed_when: __sap_preconfigure_register_sapconf_service.rc == 0
+

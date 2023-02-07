@@ -1,0 +1,46 @@
+---
+
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+
+folders_to_create:
+  - /usr/sap
+  - /sapmnt
+  - /usr/sap/trans
+
+regex_to_look_for_disks_nitro: "nvme\\w*n1\\b"
+regex_to_look_for_disks: "xvd\\w*"
+system_type_for_mount_disks: "Xen"
+system_type_xen: "Xen"
+system_type_nitro: "Nitro"
+minimum_number_of_mounted_disks_to_search: 3
+
+disk_mapping_file_full_path: /tmp/diskmap
+
+grep_find_command: grep xvd
+awk_position_command: awk '{ print $18 }'
+sed_replace_command: sed -e 's/"//g' -e 's/\.*//g'
+
+etc_fstab_full_path: /etc/fstab
+
+# Variables for /usr/sap disk
+sap_folder: /usr/sap
+volume_group_sap: vg_usrsap
+logical_volume_sap: lv_usrsap
+
+sap_disk_type_pattern:
+  - xvdf
+
+# Variables for /sapmnt disk
+sapmnt_folder: /sapmnt
+
+# Variables for /usr/sap/trans
+saptrans_folder: /usr/sap/trans
+
+# Variables for mounting SWAP disks
+sap_swap: /swap
+volume_group_swap: vg_swap
+logical_volume_swap: lv_swap
+
+swap_disk_type_pattern:
+  - xvdg

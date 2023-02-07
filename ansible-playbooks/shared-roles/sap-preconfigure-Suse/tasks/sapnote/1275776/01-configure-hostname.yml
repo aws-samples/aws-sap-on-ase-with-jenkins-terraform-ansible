@@ -1,0 +1,7 @@
+---
+
+- name: Configure Hostname
+  import_tasks: ../../Suse/generic/configure-hostname.yml
+
+- name: Configure Hostname
+  import_tasks: ../../Suse/generic/configure-etc-hosts.yml
