@@ -28,7 +28,7 @@ resource "aws_instance" "linux-server" {
   source_dest_check      = var.source_dest_check
   iam_instance_profile   = aws_iam_instance_profile.ec2_instance_profile[0].name
   monitoring             = true
-  associate_public_ip_address = true
+#  associate_public_ip_address = true
 
   lifecycle {
     ignore_changes = [user_data, root_block_device, ami]
